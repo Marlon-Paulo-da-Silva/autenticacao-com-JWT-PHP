@@ -59,9 +59,9 @@
 
           const {data} = await axios.post('login.php', formData);
 
-          console.log(data);
+          // console.log(data);
 
-          // sessionStorage.setItem('session', data);
+          sessionStorage.setItem('session', data);
 
         }catch(error){
           console.log(error);

@@ -1,13 +1,19 @@
 <?php
 
+
+
 require '../vendor/autoload.php';
 
 use app\database\Connection;
+use Firebase\JWT\JWT;
 
 header("Access-Control-Allow-Origin: *");
 
-$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
-$passwrd = filter_input(INPUT_POST, 'passwrd', FILTER_SANITIZE_STRING);
+$dotenv = Dotenv\Dotenv::createImmutable(dirname(__FILE__, 2));
+$dotenv->load();
+
+$email = filter_input(INPUT_POST, 'email');
+$passwrd = filter_input(INPUT_POST, 'passwrd');
 
 
 $pdo = Connection::connect();
@@ -19,4 +25,20 @@ $prepare->execute([
 
 $userFound = $prepare->fetch();
 
-echo json_encode($userFound);
+if(!$userFound){
+  http_response_code(401);
+}
+
+if(!password_verify($passwrd, $userFound->passwrd)){
+  http_response_code(401);
+}
+
+$payload = [
+  "exp" => time() + 10,
+  "iat" => time() + 10,
+  "email" => $email
+];
+
+$encode = JWT::encode($payload, $_ENV['KEY'],'HS256');
+
+echo json_encode($encode);
