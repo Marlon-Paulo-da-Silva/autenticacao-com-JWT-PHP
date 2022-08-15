@@ -1,0 +1,15 @@
+{
+    "name": "marlon/backend",
+    "autoload": {
+        "psr-4": {
+            "app\\":"app"
+        }
+    },
+    "authors": [
+        {
+            "name": "Marlon Paulo",
+            "email": "marlon.paulo.silva@outlook.com"
+        }
+    ],
+    "require": {}
+}
