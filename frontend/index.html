@@ -32,22 +32,62 @@
 
     <div>
       <form id="form">
-        <input type="text" name="email" value="qkoepp@tremblay.com">
-        <input type="text" name="password" value="123">
+        <input type="text" name="email" value="marlon@marlon.com">
+        <input type="text" name="passwrd" value="abc123">
         <button type="submit" class="btn-login">Login</button>
       </form>
     </div>
     |
     <div>
-      <button id="btn_check_auth" class="btn-auth">Verificar autenticaÁ„o</button>
+      <button id="btn_check_auth" class="btn-auth">Verificar autentica√ß√£o</button>
     </div>
   </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
       const form = document.querySelector("#form");
-
       
+      // const btn_check_auth = document.querySelector("#btn_check_auth");
+
+      axios.defaults.baseURL = 'http://localhost/autenticacao-com-JWT-PHP/backend/public';
+
+      form.addEventListener('submit', async function(event) {
+          event.preventDefault();
+
+        try{
+          const formData = new FormData(event.target);
+
+          const {data} = await axios.post('login.php', formData);
+
+          console.log(data);
+
+          // sessionStorage.setItem('session', data);
+
+        }catch(error){
+          console.log(error);
+        }
+
+      })
+
+      // btn_check_auth.addEventListener('click', async () => {
+      //   try{
+
+      //     const authSession = 'Bearer '+sessionStorage.getItem('session');
+
+      //     const {data} = await axios.get('auth.php',{
+      //       headers:{
+      //         "Authorization": authSession
+      //       }
+      //     })
+
+      //     console.log(data.email);
+      //   }catch(error){
+      //     if(error.response.data === 'EXPIRED'){
+      //       alert('Sess√£o expirou');
+      //     }
+      //     console.log(error);
+      //   }
+      // })
 
     </script>
 
