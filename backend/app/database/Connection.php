@@ -6,7 +6,7 @@ use PDO;
 
 class Connection
 {
-  public function connect(){
+  public static function connect(){
     return new PDO("mysql:host=localhost;dbname=phpJWT","root","",[
       PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ
     ]);
