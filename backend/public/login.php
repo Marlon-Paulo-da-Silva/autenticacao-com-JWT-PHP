@@ -34,8 +34,8 @@ if(!password_verify($passwrd, $userFound->passwrd)){
 }
 
 $payload = [
-  "exp" => time() + 10,
-  "iat" => time() + 10,
+  "exp" => time() + 50,
+  "iat" => time(),
   "email" => $email
 ];
 
